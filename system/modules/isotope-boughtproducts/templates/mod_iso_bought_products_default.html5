@@ -1,0 +1,33 @@
+<?php if( $this->products ) { ?>
+<!-- indexer::stop -->
+<section class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+
+	<?php if ($this->headline): ?>
+		<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+	<?php endif; ?>
+
+	<ul>
+	<?php foreach( $this->products as $i => $product ) { ?>
+		<li class="<?php echo (!$i) ? 'first' : ( ($i==(count($this->products)-1)) ? 'last' : '' ); ?>">
+			<figure>
+				<a href="<?php echo $product->href_reader; ?>" title="Mehr Informationen zum Produkt">
+					<?php if( $product->images->main_image['default'] ) { ?>
+						{{image::<?php echo $product->images->main_image['default']; ?>?width=70&height=70&mode=proportional}}
+					<?php } ?>
+				</a>
+			</figure>
+			<div class="info">
+				<div class="name"><?php echo $product->name; ?></div>
+				<div class="sku">Art. Nr. <?php echo $product->sku; ?></div>
+				<div class="pricebox">
+					<div class="price">Einzelpreis <?php echo number_format($product->price,2,',','.'); ?> €</div>
+					<div class="price_tax_info">zzgl. Versand</div>
+				</div>
+			</div>
+		</li>
+	<?php }?>
+	</ul>
+
+</section>
+<!-- indexer::continue -->
+<?php } ?>
